@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row pl-4" style="background-color: rgb(161, 201, 211);">
+    <div class="dropdown"></div>
+        <h5 class="btn pt-0 m-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{username}}</h5>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Editar mi información personal</a>
+            <a class="dropdown-item" href="{% url 'blog:logout' %}">Cerrar sesión</a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-4">
+        <ul class="list-group list-group-horizontal shadertwo" style="background-color: rgb(161, 201, 211); border-radius: 0px; border: 0px;">
+            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0px; border: 0px;">{{user_firstname}} {{user_lastname}}</li>
+            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0px; border: 0px;">Email: {{user_email}}</li>
+        </ul>
+    </div>
+</div>
+
+<h1 class="col-12 mt-4 text-dark" style="margin-left: 2em; text-decoration: underline;"><i>Posts publicados:</i></h1>
+<div class="container mt-4">
+    {% for post in pposts %}
+        <div class="row">
+            <div class="col-4">
+                <div class="col-12">
+                    <a class="text-dark" href="{{post.get_absolute_url}}"><h4>{{post.title}}</h4></a>
+                </div>
+                <div class="col-12 ml-4"><small>{{post.excerpt}}</small></div>
+            </div>
+            <div class="col-8">
+                <a class="col-4 btn btn-secondary" href="/blog/delpost/{{post.slug}}">Eliminar post</a>
+                <a class="col-4 btn btn-secondary" href="/blog/togglepost/{{post.slug}}">Enviar a borradores</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<h1 class="col-12 text-dark" style="margin-left: 2em; text-decoration: underline;"><i>Borradores:</i></h1>
+<div class="container mt-4">
+    {% for post in dposts %}
+        <div class="row">
+            <div class="col-4">
+                <div class="col-12">
+                    <a class="text-dark" href="{{post.get_absolute_url}}"><h4>{{post.title}}</h4></a>
+                </div>
+                <div class="col-12 ml-4"><small>{{post.excerpt}}</small></div>
+            </div>
+            <div class="col-8">
+                <a class="col-4 btn btn-secondary" href="/blog/delpost/{{post.slug}}">Eliminar post</a>
+                <a class="col-4 btn btn-secondary" href="/blog/repub/{{post.slug}}">Publicar</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<style>
+    #dropdownMenuButton:hover {
+        background-color: rgb(140, 184, 196);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-8">
+                <div class="col-12 mt-4">
+                    <h1 >{{post.title}}</h1>
+                </div>
+                <div class="col-12 mt-2">
+                    {% for i in post.septext %}
+                        <p class="text-justify">
+                            {{i}}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
