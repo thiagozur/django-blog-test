@@ -5,3 +5,7 @@
 .shadertwo {
     box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 6px, rgba(0, 0, 0, 0.18) 0px 3px 6px;
 }
+
+.hspacer {
+    visibility: hidden;
+}

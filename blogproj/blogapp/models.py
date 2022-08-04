@@ -45,6 +45,7 @@ class Post(models.Model):
 
 class PostCounter(models.Model):
     countid = models.BigAutoField(primary_key=True)
+    slug = models.SlugField(max_length=250, null=True)
     
     class Meta:
         verbose_name = 'Post Counter'

@@ -13,5 +13,6 @@ urlpatterns = [
     path('delpost/<postslug>', views.delpost, name='delpost'),
     path('togglepost/<postslug>', views.togglepost, name='togglepost'),
     path('repub/<postslug>', views.repub, name='repub'),
+    path('postedit/<postslug>', views.postedit, name='postedit'),
     path('<slug:post>/', views.post_single, name='post_single'),
 ]

@@ -2,7 +2,23 @@
 
 {% block content %}
 
-<div class="row pl-4" style="background-color: rgb(161, 201, 211);">
+{% load static %}
+
+<style>
+    #dropdownMenuButton:hover {
+        background-color: rgb(140, 184, 196);
+    }
+    
+    .hideP {
+        visibility: hidden;
+    }
+
+    .bl {
+        filter: blur(0.1rem) saturate(0%);
+    }
+</style>
+
+<div class="row pl-4 notpop" style="background-color: rgb(161, 201, 211); margin-top: 3.5rem;">
     <div class="dropdown"></div>
         <h5 class="btn pt-0 m-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{username}}</h5>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -12,52 +28,114 @@
     </div>
 </div>
 
-<div class="row mt-2">
-    <div class="col-4">
-        <ul class="list-group list-group-horizontal shadertwo" style="background-color: rgb(161, 201, 211); border-radius: 0px; border: 0px;">
-            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0px; border: 0px;">{{user_firstname}} {{user_lastname}}</li>
-            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0px; border: 0px;">Email: {{user_email}}</li>
-        </ul>
+<div class="row mt-3 notpop">
+    <div class="col-4 shadertwo d-flex justify-content-center" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">
+        <p class="mt-3">{{user_firstname}} {{user_lastname}}&nbsp &nbsp &nbsp &nbsp &nbspEmail: {{user_email}}</p>
+        <!-- <ul class="list-group list-group-horizontal shadertwo" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">
+            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">{{user_firstname}} {{user_lastname}}</li>
+            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">Email: {{user_email}}</li>
+        </ul> -->
     </div>
 </div>
 
-<h1 class="col-12 mt-4 text-dark" style="margin-left: 2em; text-decoration: underline;"><i>Posts publicados:</i></h1>
+<h1 class="col-12 mt-3 text-dark pl-4 pt-1 pb-1 shadertwo notpop" style="margin-left: 4rem; font-family: 'Mukta', sans-serif; font-weight: 400; background-color: rgb(161, 201, 211); border-radius: 2rem 0 0 2rem;">Posts publicados:</h1>
 <div class="container mt-4">
     {% for post in pposts %}
-        <div class="row">
-            <div class="col-4">
-                <div class="col-12">
-                    <a class="text-dark" href="{{post.get_absolute_url}}"><h4>{{post.title}}</h4></a>
+        <div class="row align-items-center notpop">
+            <div class="col-4 shaderone p-1 mb-3" style="background-color:  rgba(233, 233, 233, 0.295); border-top: .5rem inset rgba(209, 209, 209, 0.137);">
+                <div class="col-12" style="margin-bottom: -.8rem;">
+                    <a class="text-dark" href="{{post.get_absolute_url}}"><h2>{{post.title}}</h2></a>
                 </div>
-                <div class="col-12 ml-4"><small>{{post.excerpt}}</small></div>
+                <div class="col-12 ml-2"><small><i>Modificado por última vez: {{post.publish}}</i></small></div>
+                <div class="col-12 mt-2 ml-2"><small class="font-weight-light" style="font-size: .9rem;">{{post.excerpt}}</small></div>
             </div>
             <div class="col-8">
-                <a class="col-4 btn btn-secondary" href="/blog/delpost/{{post.slug}}">Eliminar post</a>
-                <a class="col-4 btn btn-secondary" href="/blog/togglepost/{{post.slug}}">Enviar a borradores</a>
+                <a class="col-2 btn btn-secondary hspacer mb-3">_spacer</a>
+                <button class="col-3 btn btn-secondary mb-3 popupbtn" type="button"><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static 'trashcan.png' %}" alt=""></button>
+                <a class="col-3 btn btn-secondary mb-3 text-light" href="/blog/togglepost/{{post.slug}}">Enviar a borradores</a>
+            </div>
+        </div>
+        <p class="slugsaver" style="visibility: hidden; margin: -1.5rem; position: fixed; left: 0; top: 0;">{{post.slug}}</p>
+        <div class="container popup-wrapper shaderone hideP" style="z-index: 10000; border: .2rem solid rgb(80, 80, 80); background-color: rgb(255, 255, 255); position: fixed; top: 50%; left: 50%; height: 110px; width: 500px; margin-top: -55px; margin-left: -250px;">
+            <div class="popup">
+                <div class="row pt-2 mb-2">
+                    <div class="col-12">
+                        <h5>Está seguro de que quiere eliminar este post?</h5>
+                    </div>
+                </div>
+                <div class="popup-content row">
+                        <small class="col-1 hspacer">_spacer</small>
+                        <button type="button" class="col-4 btn btn-success deleter">Sí</button>
+                        <small class="col-2 hspacer">_spacer</small>
+                        <button type="button" class="btn btn-danger col-4 noer">No</button>
+                        <small class="col-1 hspacer">_spacer</small>
+                </div>
             </div>
         </div>
     {% endfor %}
 </div>
-<h1 class="col-12 text-dark" style="margin-left: 2em; text-decoration: underline;"><i>Borradores:</i></h1>
+<h1 class="col-12 mt-3 text-dark pl-4 pt-1 pb-1 shadertwo notpop" style="margin-left: 4rem; font-family: 'Mukta', sans-serif; font-weight: 400; background-color: rgb(161, 201, 211); border-radius: 2rem 0 0 2rem;">Borradores:</h1>
 <div class="container mt-4">
     {% for post in dposts %}
-        <div class="row">
-            <div class="col-4">
-                <div class="col-12">
-                    <a class="text-dark" href="{{post.get_absolute_url}}"><h4>{{post.title}}</h4></a>
+        <div class="row align-items-center notpop">
+            <div class="col-4 shaderone p-1 mb-3" style="background-color:  rgba(233, 233, 233, 0.295); border-top: .5rem inset rgba(209, 209, 209, 0.137);">
+                <div class="col-12" style="margin-bottom: -.8rem;">
+                    <a class="text-dark" href="{{post.get_absolute_url}}"><h2>{{post.title}}</h2></a>
                 </div>
-                <div class="col-12 ml-4"><small>{{post.excerpt}}</small></div>
+                <div class="col-12 ml-2"><small><i>Modificado por última vez: {{post.publish}}</i></small></div>
+                <div class="col-12 mt-2 ml-2"><small class="font-weight-light" style="font-size: .9rem;">{{post.excerpt}}</small></div>
             </div>
             <div class="col-8">
-                <a class="col-4 btn btn-secondary" href="/blog/delpost/{{post.slug}}">Eliminar post</a>
-                <a class="col-4 btn btn-secondary" href="/blog/repub/{{post.slug}}">Publicar</a>
+                    <a class="col-2 btn btn-secondary hspacer mb-3">_spacer</a>
+                    <a class="col-2 btn btn-secondary mb-3" href="/blog/postedit/{{post.slug}}"><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static '2pencil.png' %}" alt=""></a>
+                    <button type="button" class="col-2 btn btn-secondary mb-3 popupbtn" href=""><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static 'trashcan.png' %}" alt=""></button>
+                    <a class="col-2 btn btn-secondary mb-3 text-light" href="/blog/repub/{{post.slug}}">Publicar</a>
+            </div>
+        </div>
+        <p class="slugsaver" style="visibility: hidden; margin: -1.5rem; position: fixed; left: 0; top: 0;">{{post.slug}}</p>
+        <div class="container popup-wrapper shaderone hideP" style="z-index: 10000; border: .2rem solid rgb(80, 80, 80); background-color: rgb(255, 255, 255); position: fixed; top: 50%; left: 50%; height: 110px; width: 500px; margin-top: -55px; margin-left: -250px;">
+            <div class="popup">
+                <div class="row pt-2 mb-2">
+                    <div class="col-12">
+                        <h5>Está seguro de que quiere eliminar este post?</h5>
+                    </div>
+                </div>
+                <div class="popup-content row">
+                        <small class="col-1 hspacer">_spacer</small>
+                        <button type="button" class="col-4 btn btn-success deleter">Sí</button>
+                        <small class="col-2 hspacer">_spacer</small>
+                        <button type="button" class="btn btn-danger col-4 noer">No</button>
+                        <small class="col-1 hspacer">_spacer</small>
+                </div>
             </div>
         </div>
     {% endfor %}
 </div>
-<style>
-    #dropdownMenuButton:hover {
-        background-color: rgb(140, 184, 196);
-    }
-</style>
+
+<script src="{% static 'delpop4.js' %}"></script>
+
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
