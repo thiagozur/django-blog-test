@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}Mi Perfil{% endblock %}
+
 {% block content %}
 
 {% load static %}
@@ -31,10 +33,6 @@
 <div class="row mt-3 notpop">
     <div class="col-4 shadertwo d-flex justify-content-center" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">
         <p class="mt-3">{{user_firstname}} {{user_lastname}}&nbsp &nbsp &nbsp &nbsp &nbspEmail: {{user_email}}</p>
-        <!-- <ul class="list-group list-group-horizontal shadertwo" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">
-            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">{{user_firstname}} {{user_lastname}}</li>
-            <li class="list-group-item" style="background-color: rgb(161, 201, 211); border-radius: 0 2rem 2rem 0; border: 0px;">Email: {{user_email}}</li>
-        </ul> -->
     </div>
 </div>
 
@@ -51,12 +49,12 @@
             </div>
             <div class="col-8">
                 <a class="col-2 btn btn-secondary hspacer mb-3">_spacer</a>
-                <button class="col-3 btn btn-secondary mb-3 popupbtn" type="button"><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static 'trashcan.png' %}" alt=""></button>
-                <a class="col-3 btn btn-secondary mb-3 text-light" href="/blog/togglepost/{{post.slug}}">Enviar a borradores</a>
+                <button class="col-3 btn btn-secondary mb-3 popupbtn" style="border-bottom: 2px outset rgb(99, 99, 99);" type="button"><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static 'trashcan.png' %}" alt=""></button>
+                <a class="col-3 btn btn-secondary mb-3 text-light" style="border-bottom: 2px outset rgb(99, 99, 99);" href="/blog/togglepost/{{post.slug}}">Enviar a borradores</a>
             </div>
         </div>
         <p class="slugsaver" style="visibility: hidden; margin: -1.5rem; position: fixed; left: 0; top: 0;">{{post.slug}}</p>
-        <div class="container popup-wrapper shaderone hideP" style="z-index: 10000; border: .2rem solid rgb(80, 80, 80); background-color: rgb(255, 255, 255); position: fixed; top: 50%; left: 50%; height: 110px; width: 500px; margin-top: -55px; margin-left: -250px;">
+        <div class="container popup-wrapper shaderone hideP" style="z-index: 10000; border: .2rem solid rgb(80, 80, 80); background-color: rgb(255, 255, 255); position: fixed; top: 50%; left: 50%; height: 7rem; width: 30rem; margin-top: -3.5rem; margin-left: -15rem;">
             <div class="popup">
                 <div class="row pt-2 mb-2">
                     <div class="col-12">
@@ -87,13 +85,13 @@
             </div>
             <div class="col-8">
                     <a class="col-2 btn btn-secondary hspacer mb-3">_spacer</a>
-                    <a class="col-2 btn btn-secondary mb-3" href="/blog/postedit/{{post.slug}}"><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static '2pencil.png' %}" alt=""></a>
-                    <button type="button" class="col-2 btn btn-secondary mb-3 popupbtn" href=""><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static 'trashcan.png' %}" alt=""></button>
-                    <a class="col-2 btn btn-secondary mb-3 text-light" href="/blog/repub/{{post.slug}}">Publicar</a>
+                    <a class="col-2 btn btn-secondary mb-3" style="border-bottom: 2px outset rgb(99, 99, 99);" href="/blog/postedit/{{post.slug}}"><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static '2pencil.png' %}" alt=""></a>
+                    <button type="button" style="border-bottom: 2px outset rgb(99, 99, 99);" class="col-2 btn btn-secondary mb-3 popupbtn" href=""><img class="btlight" style="height: 1.2rem; width: auto; margin-top: -.3rem;" src="{% static 'trashcan.png' %}" alt=""></button>
+                    <a class="col-2 btn btn-secondary mb-3 text-light" style="border-bottom: 2px outset rgb(99, 99, 99);" href="/blog/repub/{{post.slug}}">Publicar</a>
             </div>
         </div>
         <p class="slugsaver" style="visibility: hidden; margin: -1.5rem; position: fixed; left: 0; top: 0;">{{post.slug}}</p>
-        <div class="container popup-wrapper shaderone hideP" style="z-index: 10000; border: .2rem solid rgb(80, 80, 80); background-color: rgb(255, 255, 255); position: fixed; top: 50%; left: 50%; height: 110px; width: 500px; margin-top: -55px; margin-left: -250px;">
+        <div class="container popup-wrapper shaderone hideP" style="z-index: 10000; border: .2rem solid rgb(80, 80, 80); background-color: rgb(255, 255, 255); position: fixed; top: 50%; left: 50%;  height: 7rem; width: 30rem; margin-top: -3.5rem; margin-left: -15rem;">
             <div class="popup">
                 <div class="row pt-2 mb-2">
                     <div class="col-12">
